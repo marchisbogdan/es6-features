@@ -1,7 +1,7 @@
 const Person = require('./person.js');
 
 class Employee extends Person {
-  constructor(name, age, address, job, salary, tasks) {
+  constructor(name, age, address, job, salary, tasks = []) {
     super(name, age, address);
     this.job = job;
     this.salary = salary;
@@ -14,13 +14,20 @@ class Employee extends Person {
     return this.salary;
   }
   getTasks() {
-    return this.tasks;
+    let result = 'Tasks:';
+    this.tasks.forEach(task => { // Lexical this
+      result += this.name + ":" + task + ", ";
+    });
+    return result;
   }
   setJob(job = this.job) {
     this.job = job;
   }
   setSalary(salary = this.salary) {
     this.salary = salary;
+  }
+  addTask(task) {
+    this.tasks.push(task);
   }
 
   getProprieties() {
