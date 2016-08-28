@@ -8,44 +8,35 @@ let e3 = new Employee('steve', 23, '2nd street', 'developer', 1800, ['javascript
 let e4 = new Employee('mike', 19, '2nd street', 'developer', 1600, ['C# project']);
 let e5 = new Employee('rob', 42, '2nd street', 'developer', 3600, ['php project']);
 
-let employees = [];
+let employees = [],
+  salary_arr = [],
+  ages = [];;
+
+// Add employees to array
 employees.push(e1);
 employees.push(e2);
 employees.push(e3);
 employees.push(e4);
 employees.push(e5);
-// console.log(p);
-// console.log(p.getProprieties());
-// console.log(p.getName());
-// p.setName('tom');
-// console.log(p.getName());
-// console.log(p);
-// console.log("-----------------------------")
-// console.log(e);
-// console.log(e.getProprieties());
-// console.log(e.getName());
-// e.setName('ben');
-// console.log(e.getName());
-// e.setName();
-// console.log(e.getName());
-// console.log(e);
 
-let salary_arr = [],
-  ages = [];
 employees.forEach(employee => { // Arrow function for statement bodies
   salary_arr.push(employee.getSalary())
 });
-employees.forEach(employee => {
+
+employees.forEach(employee => { // Arrow function for statement bodies
   ages.push(employee.getAge());
 })
 
-employees.forEach(employee => {
+employees.forEach(employee => { // Arrow function for statement bodies
   console.log(greet(employee));
+  console.log(greetCoworker(employee));
+  console.log("--------------------------");
 })
 
-console.log(salary_arr);
-console.log(findBiggestSalary(salary_arr));
-console.log(getTotalForPayments(salary_arr));
+console.log("Biggest salary:" + findBiggestSalary(salary_arr));
+console.log("Total Payments:" + getTotalForPayments(salary_arr));
+console.log("Age average:" + findAvg(ages));
+console.log("Salary average:" + findAvg(salary_arr));
 console.log(e1.getTasks());
 
 function findBiggestSalary(args = 0) {
@@ -58,7 +49,7 @@ function getTotalForPayments(arr = []) {
   }, 0)
 }
 
-function findAvgAgeAndSalary(arr = []) {
+function findAvg(arr = []) {
   return arr.reduce((prev, current) => { // Arrow function for expression bodies
     return prev + current;
   }, 0) / arr.length;
@@ -69,6 +60,15 @@ function greet(employee) {
     name,
     age,
     address
-  } = employee; // Destructuring Objects
-  return 'Hi, my name is ' + name + ', i have ' + age + ' and I live on ' + address;
+  } = employee; // Destructuring Object
+  // Template Literals
+  return `Hi, my name is ${name}, i am ${age} and
+I live on ${address}`;
+}
+
+function greetCoworker({
+  name = "",
+  job = ""
+}) { // Destructuring Object + Named Parameters
+  return `Hi, my name is ${name}, i am a ${job}`;
 }

@@ -94,43 +94,38 @@ var e3 = new Employee('steve', 23, '2nd street', 'developer', 1800, ['javascript
 var e4 = new Employee('mike', 19, '2nd street', 'developer', 1600, ['C# project']);
 var e5 = new Employee('rob', 42, '2nd street', 'developer', 3600, ['php project']);
 
-var employees = [];
+var employees = [],
+    salary_arr = [],
+    ages = [];;
+
+// Add employees to array
 employees.push(e1);
 employees.push(e2);
 employees.push(e3);
 employees.push(e4);
 employees.push(e5);
-// console.log(p);
-// console.log(p.getProprieties());
-// console.log(p.getName());
-// p.setName('tom');
-// console.log(p.getName());
-// console.log(p);
-// console.log("-----------------------------")
-// console.log(e);
-// console.log(e.getProprieties());
-// console.log(e.getName());
-// e.setName('ben');
-// console.log(e.getName());
-// e.setName();
-// console.log(e.getName());
-// console.log(e);
 
-var salary_arr = [],
-    ages = [];
 employees.forEach(function (employee) {
   // Arrow function for statement bodies
   salary_arr.push(employee.getSalary());
 });
+
 employees.forEach(function (employee) {
+  // Arrow function for statement bodies
   ages.push(employee.getAge());
 });
+
 employees.forEach(function (employee) {
+  // Arrow function for statement bodies
   console.log(greet(employee));
+  console.log(greetCoworker(employee));
+  console.log("--------------------------");
 });
-console.log(salary_arr);
-console.log(findBiggestSalary(salary_arr));
-console.log(getTotalForPayments(salary_arr));
+
+console.log("Biggest salary:" + findBiggestSalary(salary_arr));
+console.log("Total Payments:" + getTotalForPayments(salary_arr));
+console.log("Age average:" + findAvg(ages));
+console.log("Salary average:" + findAvg(salary_arr));
 console.log(e1.getTasks());
 
 function findBiggestSalary() {
@@ -148,7 +143,7 @@ function getTotalForPayments() {
   }, 0);
 }
 
-function findAvgAgeAndSalary() {
+function findAvg() {
   var arr = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
   return arr.reduce(function (prev, current) {
@@ -160,9 +155,19 @@ function findAvgAgeAndSalary() {
 function greet(employee) {
   var name = employee.name;
   var age = employee.age;
-  var address = employee.address; // Destructuring Objects
+  var address = employee.address; // Destructuring Object
+  // Template Literals
 
-  return 'Hi, my name is ' + name + ', i have ' + age + ' and I live on ' + address;
+  return 'Hi, my name is ' + name + ', i am ' + age + ' and\nI live on ' + address;
+}
+
+function greetCoworker(_ref) {
+  var _ref$name = _ref.name;
+  var name = _ref$name === undefined ? "" : _ref$name;
+  var _ref$job = _ref.job;
+  var job = _ref$job === undefined ? "" : _ref$job;
+  // Destructuring Object
+  return 'Hi, my name is ' + name + ', i am a ' + job;
 }
 },{"./employee.js":1,"./person.js":3}],3:[function(require,module,exports){
 "use strict";
